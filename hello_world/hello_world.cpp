@@ -1,4 +1,4 @@
-#include <CL/cl.hpp>
+#include <CL/opencl.hpp>
 #include <fstream>
 #include <iostream>
 
@@ -57,9 +57,8 @@ int main(){
      * Compile the program which will run on the device.
      * */
 
-    cl::Program::Sources sources(1, std::make_pair(src.c_str(), src.length() + 1));
     cl::Context context(device);
-    cl::Program program(context, sources);
+    cl::Program program(context, src);
 
     auto err = program.build();
     if(err != CL_BUILD_SUCCESS){

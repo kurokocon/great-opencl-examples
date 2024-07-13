@@ -1,4 +1,4 @@
-#include <CL/cl.hpp>
+#include <CL/opencl.hpp>
 #include <fstream>
 #include <iostream>
 #include <algorithm>
@@ -188,9 +188,8 @@ void initializeDevice(){
      * Compile kernel program which will run on the device.
      * */
 
-    cl::Program::Sources sources(1, std::make_pair(src.c_str(), src.length() + 1));
     context = cl::Context(device);
-    program = cl::Program(context, sources);
+    program = cl::Program(context, src);
     
     auto err = program.build();
     if(err != CL_BUILD_SUCCESS){
